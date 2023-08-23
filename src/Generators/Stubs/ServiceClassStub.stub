@@ -1,0 +1,90 @@
+<?php
+
+namespace Modules\{{ module }}\{{ service_path }};
+
+use App\Exceptions\ApiException;
+use {{ model_path }}\{{ model }};
+use Illuminate\Contracts\Pagination\LengthAwarePaginator;
+use Modules\{{ module }}\{{ repo_interface_path }}\{{ model }}Repository;
+use Modules\{{ module }}\{{ service_interface_path }}\{{ model }}Service;
+use Modules\{{ module }}\{{ request_path }}\{{ model }}CreateRequest;
+use Modules\{{ module }}\{{ request_path }}\{{ model }}ListRequest;
+use Modules\{{ module }}\{{ request_path }}\{{ model }}UpdateRequest;
+
+class {{ model }}ServiceImpl implements {{ model }}Service
+{
+    /**
+     * @var {{ model }}Repository
+     */
+    private {{ model }}Repository ${{ lc_model }}Repository;
+
+    public function __construct({{ model }}Repository ${{ lc_model }}Repository)
+    {
+        $this->{{ lc_model }}Repository = ${{ lc_model }}Repository;
+    }
+
+    /**
+     * @param {{ model }}ListRequest $request
+     * @return LengthAwarePaginator
+     */
+    public function getByCondition({{ model }}ListRequest $request): LengthAwarePaginator
+    {
+        return $this->{{ lc_model }}Repository->getByCondition();
+    }
+
+    /**
+     * @param {{ model }}CreateRequest $request
+     * @return {{ model }}
+     */
+    public function create({{ model }}CreateRequest $request): {{ model }}
+    {
+        ${{ lc_model }} = new {{ model }}($request->all());
+
+        return $this->{{ lc_model }}Repository->save(${{ lc_model }});
+    }
+
+    /**
+     * @param int $id
+     * @return {{ model }}
+     */
+    public function show(int $id): {{ model }}
+    {
+        ${{ lc_model }} = $this->{{ lc_model }}Repository->findById($id);
+        if (!${{ lc_model }}) {
+            throw ApiException::notFound('{{ model }} not found');
+        }
+
+        return ${{ lc_model }};
+    }
+
+    /**
+     * @param {{ model }}UpdateRequest $request
+     * @param int $id
+     * @return {{ model }}
+     */
+    public function update({{ model }}UpdateRequest $request, int $id): {{ model }}
+    {
+        ${{ lc_model }} = $this->{{ lc_model }}Repository->findById($id);
+        if (!${{ lc_model }}) {
+            throw ApiException::notFound('{{ model }} not found');
+        }
+
+        $this->{{ lc_model }}Repository->save(${{ lc_model }});
+
+        return ${{ lc_model }};
+    }
+
+    /**
+     * @param int $id
+     * @return bool
+     */
+    public function delete(int $id): bool
+    {
+        ${{ lc_model }} = $this->{{ lc_model }}Repository->findById($id);
+        if (!${{ lc_model }}) {
+            throw ApiException::notFound('{{ model }} not found');
+        }
+
+        return $this->{{ lc_model }}Repository->delete(${{ lc_model }});
+    }
+}

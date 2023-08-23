@@ -1,0 +1,36 @@
+<?php
+
+namespace Modules\{{ module }}\{{ resource_path }};
+
+use Illuminate\Http\Request;
+use App\Transformers\SuccessResource;
+
+/**
+ * @OA\Schema(
+ *     properties={
+ *          @OA\Property(
+ *              property="meta",
+ *              ref="#/components/schemas/MetaResource"
+ *          ),
+ *          @OA\Property(
+ *              property="data",
+ *              type="object",
+ *              @OA\Property(property="id", type="string"),
+{{ docBody }}
+ *          )
+ *     }
+ * )
+ */
+class {{ resource_class }} extends SuccessResource
+{
+    /**
+     * Transform the resource into an array.
+     *
+     * @param Request $request
+     * @return array
+     */
+    public function toArray($request): array
+    {
+        return parent::toArray($request);
+    }
+}

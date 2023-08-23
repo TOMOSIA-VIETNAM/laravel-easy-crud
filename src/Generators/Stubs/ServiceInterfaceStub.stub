@@ -1,0 +1,43 @@
+<?php
+
+namespace Modules\{{ module }}\{{ service_interface_path }};
+
+use {{ model_path }}\{{ model }};
+use Illuminate\Contracts\Pagination\LengthAwarePaginator;
+use Modules\{{ module }}\{{ request_path }}\{{ model }}CreateRequest;
+use Modules\{{ module }}\{{ request_path }}\{{ model }}ListRequest;
+use Modules\{{ module }}\{{ request_path }}\{{ model }}UpdateRequest;
+
+interface {{ model }}Service
+{
+    /**
+     * @param {{ model }}ListRequest $request
+     * @return LengthAwarePaginator
+     */
+    public function getByCondition({{ model }}ListRequest $request): LengthAwarePaginator;
+
+    /**
+     * @param {{ model }}CreateRequest $request
+     * @return {{ model }}
+     */
+    public function create({{ model }}CreateRequest $request): {{ model }};
+
+    /**
+     * @param int $id
+     * @return {{ model }}
+     */
+    public function show(int $id): {{ model }};
+
+    /**
+     * @param {{ model }}UpdateRequest $request
+     * @param int $id
+     * @return {{ model }}
+     */
+    public function update({{ model }}UpdateRequest $request, int $id): {{ model }};
+
+    /**
+     * @param int $id
+     * @return bool
+     */
+    public function delete(int $id): bool;
+}

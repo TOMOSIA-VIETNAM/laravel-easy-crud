@@ -1,0 +1,60 @@
+<?php
+
+namespace Modules\{{ module }}\{{ resource_path }};
+
+use App\Transformers\MetaPaginationResource;
+use App\Transformers\Resource;
+
+/**
+ * @OA\Schema(
+ *     properties={
+ *          @OA\Property(
+ *              property="meta",
+ *              ref="#/components/schemas/MetaResource"
+ *          ),
+ *          @OA\Property(
+ *              property="data",
+ *              type="array",
+ *               @OA\Items(
+ *                  type="object",
+ *                  @OA\Property(property="id", type="string"),
+{{ docBody }}
+ *               )
+ *          )
+ *     }
+ * )
+ */
+class {{ resource_class }} extends Resource
+{
+    /**
+     * SuccessResource constructor.
+     * @param null $resource
+     * @param int $code
+     * @param string $message
+     */
+    public function __construct($resource = null, $code = 200, $message = "Successful")
+    {
+        $pagination = [
+            'total' => $resource->total(),
+            'count' => $resource->count(),
+            'per_page' => $resource->perPage(),
+            'current_page' => $resource->currentPage(),
+            'total_pages' => $resource->lastPage()
+        ];
+
+        parent::__construct($resource, new MetaPaginationResource($code, $message, null, $pagination));
+    }
+
+    /**
+     * Transform the resource into an array.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return array
+     */
+    public function toArray($request): array
+    {
+        return [
+            'data' => $this->items()
+        ];
+    }
+}

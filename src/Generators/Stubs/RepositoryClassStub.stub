@@ -1,0 +1,35 @@
+<?php
+
+namespace {{ namespace }};
+
+use {{ namespaceModel }};
+use {{ namespaceInterface }};
+
+class {{ class }} implements {{ interface }}
+{
+    /**
+     * Save {{ model }} to database
+     *
+     * @param {{ model }} ${{ modelVariable }}
+     * @return {{ model }}
+     */
+    public function save({{ model }} ${{ modelVariable }}): {{ model }}
+    {
+        ${{ modelVariable }}->save();
+
+        return ${{ modelVariable }};
+    }
+
+    /**
+     * Get {{ model }} by id
+     *
+     * @param int $id
+     * @return {{ model }}|null
+     */
+    public function findById(int $id): ?{{ model }}
+    {
+        /** @noinspection PhpIncompatibleReturnTypeInspection */
+        return {{ model }}::query()
+            ->find($id);
+    }
+}

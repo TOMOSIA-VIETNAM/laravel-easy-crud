@@ -1,0 +1,25 @@
+<?php
+
+namespace {{ namespace }};
+
+use {{ namespacedModel }};
+
+interface {{ interface }}
+{
+    /**
+     * Save to database
+     *
+     * @param {{ model }} ${{ modelVariable }}
+     * @return {{ model }}
+     */
+    public function save({{ model }} ${{ modelVariable }}): {{ model }};
+
+    /**
+     * Get by id
+     *
+     * @param int $id
+     * @param array $relates
+     * @return {{ model }}|null
+     */
+    public function findById(int $id, $relates = []): ?{{ model }};
+}

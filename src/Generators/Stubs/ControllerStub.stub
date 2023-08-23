@@ -1,0 +1,199 @@
+<?php
+
+namespace Modules\{{ module }}\{{ controller_path }};
+
+use App\Transformers\SuccessResource;
+use Modules\{{ module }}\{{ service_interface_path }}\{{ model }}Service;
+use Modules\{{ module }}\{{ request_path }}\{{ model }}CreateRequest;
+use Modules\{{ module }}\{{ request_path }}\{{ model }}ListRequest;
+use Modules\{{ module }}\{{ request_path }}\{{ model }}UpdateRequest;
+use Modules\{{ module }}\{{ resource_path }}\{{ model }}Resource;
+use Modules\{{ module }}\{{ resource_path }}\{{ model }}sResource;
+
+class {{ model }}Controller extends BaseController
+{
+    /**
+     * @var {{ model }}Service
+     */
+    public {{ model }}Service ${{ lc_model }}Service;
+
+    /**
+     * {{ model }}Controller constructor.
+     * @param {{ model }}Service ${{ lc_model }}Service
+     */
+    public function __construct({{ model }}Service ${{ lc_model }}Service)
+    {
+        $this->{{ lc_model }}Service = ${{ lc_model }}Service;
+    }
+
+    /**
+     *
+     * @OA\Get(
+     *     path="/v1/{{ lc_model }}s",
+     *     tags={"{{ model }}"},
+     *     @OA\Response(
+     *         response=200,
+     *         description="Successful",
+     *         @OA\JsonContent(ref="#/components/schemas/{{ model }}sResource")
+     *     ),
+     *     @OA\Response(
+     *         response=400,
+     *         description="Bad Request",
+     *         @OA\JsonContent(ref="#/components/schemas/ErrorResource"),
+     *     )
+     * )
+     * @param {{ model }}ListRequest $request
+     * @return {{ model }}sResource
+     */
+    public function index({{ model }}ListRequest $request): {{ model }}sResource
+    {
+        $list = $this->{{ lc_model }}Service->getByCondition($request);
+
+        return new {{ model }}sResource($list);
+    }
+
+    /**
+     *
+     * @OA\Post(
+     *     path="/v1/{{ lc_model }}s",
+     *     tags={"{{ model }}"},
+     *     @OA\RequestBody(
+     *         required=true,
+     *         @OA\JsonContent(ref="#/components/schemas/{{ model }}CreateRequest")
+     *     ),
+     *     @OA\Response(
+     *         response=200,
+     *         description="Successful",
+     *         @OA\JsonContent(ref="#/components/schemas/{{ model }}Resource")
+     *     ),
+     *     @OA\Response(
+     *         response=400,
+     *         description="Bad Request",
+     *         @OA\JsonContent(ref="#/components/schemas/ErrorResource"),
+     *     )
+     * )
+     *
+     * @param {{ model }}CreateRequest $request
+     * @return {{ model }}Resource
+     */
+    public function create({{ model }}CreateRequest $request): {{ model }}Resource
+    {
+        $data = $this->{{ lc_model }}Service->create($request);
+
+        return new {{ model }}Resource($data);
+    }
+
+    /**
+     *
+     * @OA\Get(
+     *     path="/v1/{{ lc_model }}s/{id}",
+     *     tags={"{{ model }}"},
+     *     @OA\Parameter(
+     *          in="path",
+     *          name="id",
+     *          required=true,
+     *          description="{{ model }} id",
+     *          @OA\Schema(
+     *            type="integer",
+     *            format="int64"
+     *          )
+     *     ),
+     *     @OA\Response(
+     *         response=200,
+     *         description="Successful",
+     *         @OA\JsonContent(ref="#/components/schemas/{{ model }}Resource")
+     *     ),
+     *     @OA\Response(
+     *         response=400,
+     *         description="Bad Request",
+     *         @OA\JsonContent(ref="#/components/schemas/ErrorResource"),
+     *     )
+     * )
+     * @param int $id
+     * @return {{ model }}Resource
+     */
+    public function show(int $id): {{ model }}Resource
+    {
+        $data = $this->{{ lc_model }}Service->show($id);
+
+        return new {{ model }}Resource($data);
+    }
+
+    /**
+     *
+     * @OA\PUT(
+     *     path="/v1/{{ lc_model }}s/{id}",
+     *     tags={"{{ model }}"},
+     *     @OA\Parameter(
+     *          in="path",
+     *          name="id",
+     *          required=true,
+     *          description="{{ model }} id",
+     *          @OA\Schema(
+     *            type="integer",
+     *            format="int64"
+     *          )
+     *     ),
+     *     @OA\RequestBody(
+     *         required=true,
+     *         @OA\JsonContent(ref="#/components/schemas/{{ model }}UpdateRequest")
+     *     ),
+     *     @OA\Response(
+     *         response=200,
+     *         description="Successful",
+     *         @OA\JsonContent(ref="#/components/schemas/{{ model }}Resource")
+     *     ),
+     *     @OA\Response(
+     *         response=400,
+     *         description="Bad Request",
+     *         @OA\JsonContent(ref="#/components/schemas/ErrorResource"),
+     *     )
+     * )
+     *
+     * @param {{ model }}UpdateRequest $request
+     * @param int $id
+     * @return {{ model }}Resource
+     */
+    public function update({{ model }}UpdateRequest $request, int $id): {{ model }}Resource
+    {
+        $data = $this->{{ lc_model }}Service->update($request, $id);
+
+        return new {{ model }}Resource($data);
+    }
+
+    /**
+     *
+     * @OA\DELETE(
+     *     path="/v1/{{ lc_model }}s/{id}",
+     *     tags={"{{ model }}"},
+     *     @OA\Parameter(
+     *          in="path",
+     *          name="id",
+     *          required=true,
+     *          description="{{ model }} id",
+     *          @OA\Schema(
+     *            type="integer",
+     *            format="int64"
+     *          )
+     *     ),
+     *     @OA\Response(
+     *         response=200,
+     *         description="Successful",
+     *         @OA\JsonContent(ref="#/components/schemas/SuccessResource")
+     *     ),
+     *     @OA\Response(
+     *         response=400,
+     *         description="Bad Request",
+     *         @OA\JsonContent(ref="#/components/schemas/ErrorResource"),
+     *     )
+     * )
+     * @param int $id
+     * @return SuccessResource
+     */
+    public function delete(int $id): SuccessResource
+    {
+        $this->{{ lc_model }}Service->delete($id);
+
+        return new SuccessResource();
+    }
+}
