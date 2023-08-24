@@ -12,7 +12,7 @@ Auto generate:
 ## Installation
 Require the package with composer using the following command:
 
-`composer require vietnh/laravel-easy-crud --dev`
+`composer require tomosia/laravel-easy-crud --dev`
 
 Or add the following to your composer.json's require-dev section and `composer update`
 
