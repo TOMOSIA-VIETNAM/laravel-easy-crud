@@ -1,11 +1,11 @@
 {
-    "name": "vietnh/laravel-easy-crud",
+    "name": "tomosia/laravel_easy_crud",
     "description": "Give commands to help programmers save time when coding",
     "type": "library",
     "authors": [
         {
             "name": "Viet Nguyen",
-            "email": "viet.nh.hust@gmail.com"
+            "email": "viet.nguyen@tomosia.com"
         }
     ],
     "minimum-stability": "dev",
