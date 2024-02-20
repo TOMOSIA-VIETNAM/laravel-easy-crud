@@ -27,9 +27,9 @@ class {{ model }}ServiceImpl implements {{ model }}Service
      * @param {{ model }}ListRequest $request
      * @return LengthAwarePaginator
      */
-    public function getByCondition({{ model }}ListRequest $request): LengthAwarePaginator
+    public function getByConditions({{ model }}ListRequest $request): LengthAwarePaginator
     {
-        return $this->{{ lc_model }}Repository->getByCondition();
+        return $this->{{ lc_model }}Repository->getByConditions();
     }
 
     /**

@@ -47,7 +47,7 @@ class {{ model }}Controller extends BaseController
      */
     public function index({{ model }}ListRequest $request): {{ model }}sResource
     {
-        $list = $this->{{ lc_model }}Service->getByCondition($request);
+        $list = $this->{{ lc_model }}Service->getByConditions($request);
 
         return new {{ model }}sResource($list);
     }

@@ -22,4 +22,12 @@ interface {{ interface }}
      * @return {{ model }}|null
      */
     public function findById(int $id, array $relates = []): ?{{ model }};
+
+    /**
+     * Delete by id
+     *
+     * @param int $id
+     * @return bool
+    */
+    public function deleteById(int $id): bool;
 }
