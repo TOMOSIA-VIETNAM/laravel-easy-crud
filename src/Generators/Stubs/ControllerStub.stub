@@ -121,7 +121,7 @@ class {{ model }}Controller extends BaseController
 
     /**
      *
-     * @OA\PUT(
+     * @OA\Put(
      *     path="/v1/{{ lc_model }}s/{id}",
      *     tags={"{{ model }}"},
      *     @OA\Parameter(
@@ -163,7 +163,7 @@ class {{ model }}Controller extends BaseController
 
     /**
      *
-     * @OA\DELETE(
+     * @OA\Delete(
      *     path="/v1/{{ lc_model }}s/{id}",
      *     tags={"{{ model }}"},
      *     @OA\Parameter(

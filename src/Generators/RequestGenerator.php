@@ -61,9 +61,9 @@ class RequestGenerator extends Generator
         $docBody = '';
         foreach ($fillables as $key => $fillable) {
             if ($key != count($fillables) - 1) {
-                $docBody .= sprintf(" *              @OA\Property(property='%s', type='string'),\n", $fillable);
+                $docBody .= sprintf(" *              @OA\Property(property=\"%s\", type=\"string\"),\n", $fillable);
             } else {
-                $docBody .= sprintf(" *              @OA\Property(property='%s', type='string')", $fillable);
+                $docBody .= sprintf(" *              @OA\Property(property=\"%s\", type\"string\")", $fillable);
             }
         }
 

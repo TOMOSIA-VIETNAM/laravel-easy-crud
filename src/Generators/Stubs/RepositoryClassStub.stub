@@ -24,12 +24,14 @@ class {{ class }} implements {{ interface }}
      * Get {{ model }} by id
      *
      * @param int $id
+     * @param array $relates
      * @return {{ model }}|null
      */
-    public function findById(int $id): ?{{ model }}
+    public function findById(int $id, array $relates = []): ?{{ model }}
     {
         /** @noinspection PhpIncompatibleReturnTypeInspection */
         return {{ model }}::query()
+            ->with($relates)
             ->find($id);
     }
 }

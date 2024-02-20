@@ -2,7 +2,7 @@
 
 namespace {{ namespace }};
 
-use {{ namespacedModel }};
+use {{ namespaceModel }};
 
 interface {{ interface }}
 {
@@ -21,5 +21,5 @@ interface {{ interface }}
      * @param array $relates
      * @return {{ model }}|null
      */
-    public function findById(int $id, $relates = []): ?{{ model }};
+    public function findById(int $id, array $relates = []): ?{{ model }};
 }
